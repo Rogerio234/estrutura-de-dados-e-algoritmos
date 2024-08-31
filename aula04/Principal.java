@@ -1,16 +1,12 @@
-class Principal{
-    public static void main(String[] args) {
-        Fila<String> listaAlunos = new Fila<String>("Alunos");
+public class Principal {
+    public static void main(String[] args){
+        System.out.println("=== Testando Pilha ===");
+        Pilha<String> pilha = new Pilha<String>("LETRAS");
 
-        listaAlunos.enfileirar("Rogerio");
-        listaAlunos.enfileirar("Carlos");
-        listaAlunos.enfileirar("Rodrigo");
-        listaAlunos.imprimeFila();
-        listaAlunos.desenfileirar();
-        listaAlunos.imprimeFila();
-        listaAlunos.desenfileirar();
-        listaAlunos.imprimeFila();
-        listaAlunos.desenfileirar();
-        listaAlunos.imprimeFila();
+        pilha.push("A");
+        pilha.push("B");
+        pilha.imprimePilha();
+
+        System.out.println("Topo da pilha: "+ pilha.peek());
     }
 }
