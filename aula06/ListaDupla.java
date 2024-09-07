@@ -3,6 +3,7 @@ public class ListaDupla<T> {
     private String nomeLista;
     private NoDuplo<T> primeiroNo;
     private NoDuplo<T> ultimoNo;
+    private int tamanho;
 
 
     public ListaDupla(){
@@ -13,6 +14,17 @@ public class ListaDupla<T> {
         this.nomeLista = nomeLista;
         this.primeiroNo = null;
         this.ultimoNo = null;
+        this.tamanho = 0;
+    }
+
+    private void atualizarIndices(){
+        NoDuplo<T> atual = primeiroNo;
+        int indice = 0;
+        while(atual != null){
+            atual.setIndice(indice);
+            atual = atual.getProximoNo();
+            indice++;
+        }
     }
 
     public void imprimeLista(){
@@ -31,7 +43,7 @@ public class ListaDupla<T> {
     }
 
     public void addInicio(T dado){
-        NoDuplo<T> novoNo = new NoDuplo<T>(dado);
+        NoDuplo<T> novoNo = new NoDuplo<T>(dado, 0);
         if(primeiroNo == null){
             primeiroNo = ultimoNo = novoNo;
         }else{
@@ -39,10 +51,42 @@ public class ListaDupla<T> {
             primeiroNo.setAnteriorNo(novoNo);
             primeiroNo = novoNo;
         }
+        atualizarIndices();
+        tamanho++;
         }
         
+        public void removeInicio(){
+            if(primeiroNo == null){
+                System.out.println("Lista vazia");
+            }else{
+                primeiroNo = primeiroNo.getProximoNo();
+                if(primeiroNo != null){
+                    primeiroNo.setAnteriorNo(null);
+                }else{
+                    ultimoNo = null;
+                }
+                atualizarIndices();
+                tamanho --;
+            }
+           
+        }
+
+        public void removeFinal(){
+            if(ultimoNo == null){
+                System.out.println("Lista vazia");
+            }else{
+                ultimoNo = ultimoNo.getAnteriorNo();
+                if(ultimoNo != null){
+                    ultimoNo.setProximoNo(null);
+                }else{
+                    primeiroNo = null;
+                }
+                tamanho --;
+            }
+          
+        }
         public void addFinal(T dado){
-            NoDuplo<T> novoNo = new NoDuplo<T>(dado);
+            NoDuplo<T> novoNo = new NoDuplo<T>(dado, tamanho);
             if(ultimoNo == null){
                 primeiroNo = ultimoNo = novoNo;
             }else{
@@ -50,5 +94,6 @@ public class ListaDupla<T> {
                 ultimoNo.setProximoNo(novoNo);
                 ultimoNo = novoNo;
             }
+            tamanho++;
             }
 }
