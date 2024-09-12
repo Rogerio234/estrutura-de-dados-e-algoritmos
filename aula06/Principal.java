@@ -8,9 +8,13 @@ public class Principal{
     lista.imprimeLista();
     lista.addFinal("Carlos");
     lista.imprimeLista();
-    lista.removeInicio();
+    lista.addMeio("Vitor",2);
     lista.imprimeLista();
-    lista.removeFinal();
+    lista.removeMeio(1);
     lista.imprimeLista();
+    // lista.removeInicio();
+    // lista.imprimeLista();
+    // lista.removeFinal();
+    // lista.imprimeLista();
   }
 }

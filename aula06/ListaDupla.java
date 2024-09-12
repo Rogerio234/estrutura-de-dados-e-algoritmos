@@ -96,4 +96,61 @@ public class ListaDupla<T> {
             }
             tamanho++;
             }
+
+        public void addMeio(T dado, int posicao){
+            if(posicao <= 0 ){
+                addInicio(dado);
+                return;
+            }
+            if(posicao >= tamanho){
+                addFinal(dado);
+                return;
+            }
+            
+            NoDuplo<T> novoNo =  new NoDuplo<T>(dado, posicao);
+            NoDuplo<T> atual = primeiroNo;
+            int indice = 0;
+
+            while (atual != null && indice < posicao) {
+                atual = atual.getProximoNo();
+                indice++;
+            }
+
+            NoDuplo<T> anterior = atual.getAnteriorNo();
+            novoNo.setProximoNo(atual);
+            novoNo.setAnteriorNo(anterior);
+            
+            anterior.setProximoNo(novoNo);
+            atual.setAnteriorNo(novoNo);
+            atualizarIndices();
+            tamanho++;
+        }
+
+        public void removeMeio(int posicao){
+            if(posicao <= 0 ){
+                removeInicio();
+                return;
+            }
+            if(posicao >= tamanho - 1){
+                removeFinal();
+                return;
+            }
+
+            NoDuplo<T> atual = primeiroNo;
+            int indice = 0;
+
+            while (atual != null && indice < posicao) {
+                atual = atual.getProximoNo();
+                indice++;
+            }
+
+            atual.getAnteriorNo().setProximoNo(atual.getProximoNo());
+            atual.getProximoNo().setAnteriorNo(atual.getAnteriorNo());
+
+            System.out.println("Dado removido " + atual.getDado());
+            atualizarIndices();
+            tamanho--;
+
+
+        }
 }
